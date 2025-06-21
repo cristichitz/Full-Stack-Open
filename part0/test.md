@@ -3,13 +3,15 @@ sequenceDiagram
     participant browser
     participant server
 
-    Note right of browser: The user writes a new note and clicks the Save button
+    Note right of browser: A new note is written and the Save button is clicked
 
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
         activate server
-        Note right of server: Contains the new note as form data
+        Note right of server: A POST request with the new note as form data
         server-->>browser: HTTP 302 Redirect to /exampleapp/notes
         deactivate server
+
+    Note right of browser: The reload of the page causes 3 more HTTP requests
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
         activate server
