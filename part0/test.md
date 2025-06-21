@@ -11,29 +11,28 @@ sequenceDiagram
         server-->>browser: HTTP 302 Redirect to /exampleapp/notes
         deactivate server
 
-    Note right of browser: The reload of the page causes 3 more HTTP requests
+    Note right of browser: The reload of the page causes 4 more HTTP requests
 
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    browser->>server: GET 304 https://studies.cs.helsinki.fi/exampleapp/notes
         activate server
         server-->>browser: HTML document
         deactivate server
 
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    browser->>server: GET 304 https://studies.cs.helsinki.fi/exampleapp/main.css
         activate server
-        server-->>browser: the css file
+        server-->>browser: Response: the css file
         deactivate server
 
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    browser->>server: GET 304 https://studies.cs.helsinki.fi/exampleapp/main.js
         activate server
-        server-->>browser: the JavaScript file
+        server-->>browser: Response: the JavaScript file
         deactivate server
 
-    Note right of browser: The browser executes JavaScript that fetches the updated list of notes in JSON
+    Note right of browser: The browser executes JavaScript that fetches the updated list of notes in JSON :D
 
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    browser->>server: GET 200 https://studies.cs.helsinki.fi/exampleapp/data.json
         activate server
         server-->>browser: Updated list of notes (JSON)
         deactivate server
 
-    Note right of browser: The browser executes the callback function that renders the updated notes
 ```
